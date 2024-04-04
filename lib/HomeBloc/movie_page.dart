@@ -29,6 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int counter = 0;
+  List<Movie> selectedMovies = [];
   final dio = Dio();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -36,6 +37,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
+        bottomSheet: selectedMovies.isNotEmpty
+            ? Container(
+                height: 200,
+                child: MovieListWidget(
+                  items: selectedMovies,
+                  onTap: (movie) {
+                    setState(() {
+                      selectedMovies.remove(movie);
+                    });
+                  },
+                ),
+              )
+            : null,
         appBar: AppBar(
           title: Text('Movie Page'),
           leading: IconButton(
@@ -51,7 +65,12 @@ class _HomePageState extends State<HomePage> {
               return Text("Loading.......");
             } else if (state is MovieNew) {
               return MovieListWidget(
-                  items: state.data.results, onTap: (Movie movie) {});
+                  items: state.data.results,
+                  onTap: (Movie movie) {
+                    setState(() {
+                      selectedMovies.add(movie);
+                    });
+                  });
             } else {
               return SizedBox();
             }
