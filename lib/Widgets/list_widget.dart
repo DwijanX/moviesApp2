@@ -19,6 +19,7 @@ class MovieListWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 title: Text(item.title),
+                subtitle: Text(item.overview),
                 onTap: () {
                   // Handle item tap here
                   print('Tapped on ${item.title}');
