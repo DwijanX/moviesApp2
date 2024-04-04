@@ -39,16 +39,21 @@ class _HomePageState extends State<HomePage> {
         key: _scaffoldKey,
         bottomSheet: selectedMovies.isNotEmpty
             ? Container(
-                height: 200,
-                child: MovieListWidget(
-                  items: selectedMovies,
-                  onTap: (movie) {
-                    setState(() {
-                      selectedMovies.remove(movie);
-                    });
-                  },
-                ),
-              )
+                height: 300,
+                child: Column(children: [
+                  Container(
+                    height: 200,
+                    child: MovieListWidget(
+                      items: selectedMovies,
+                      onTap: (movie) {
+                        setState(() {
+                          selectedMovies.remove(movie);
+                        });
+                      },
+                    ),
+                  ),
+                  ElevatedButton(onPressed: () {}, child: Text("pagar"))
+                ]))
             : null,
         appBar: AppBar(
           title: Text('Movie Page'),
