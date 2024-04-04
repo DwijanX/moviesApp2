@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:movies_app_2/HomeBloc/movie_cubit.dart';
 import 'package:movies_app_2/HomeBloc/movie_state.dart';
+import 'package:movies_app_2/Types/movie_type.dart';
+import 'package:movies_app_2/Widgets/list_widget.dart';
 
 class HomeBloc extends StatefulWidget {
   const HomeBloc({super.key});
@@ -48,7 +50,8 @@ class _HomePageState extends State<HomePage> {
             if (state is MovieLoading) {
               return Text("Loading.......");
             } else if (state is MovieNew) {
-              return Text("loaded");
+              return MovieListWidget(
+                  items: state.data.results, onTap: (Movie movie) {});
             } else {
               return SizedBox();
             }

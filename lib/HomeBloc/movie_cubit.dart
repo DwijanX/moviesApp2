@@ -14,7 +14,7 @@ class MovieCubit extends Cubit<MovieState> {
 
     try {
       ResponseMovie data = welcomeFromJson(response.toString());
-      emit(MovieNew(data: [data]));
+      emit(MovieNew(data: data));
     } catch (e) {
       print(e);
     }
@@ -24,7 +24,7 @@ class MovieCubit extends Cubit<MovieState> {
     try {
       ResponseMovie data = welcomeFromJson(welcomeJson);
 
-      emit(MovieNew(data: [data]));
+      emit(MovieNew(data: data));
     } catch (e) {
       print(e);
     }

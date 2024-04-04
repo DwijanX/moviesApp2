@@ -11,7 +11,7 @@ class MovieLoading extends MovieState {
 }
 
 class MovieNew extends MovieState {
-  List<ResponseMovie> data;
+  ResponseMovie data;
   MovieNew({required this.data});
   @override
   List<Object> get props => [data];
