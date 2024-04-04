@@ -3,9 +3,8 @@ import 'package:movies_app_2/Types/movie_type.dart';
 
 class SimpleMovieWidget extends StatelessWidget {
   final List<Movie> items;
-  final Function(Movie) onTap;
 
-  SimpleMovieWidget({required this.items, required this.onTap});
+  SimpleMovieWidget({required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +19,6 @@ class SimpleMovieWidget extends StatelessWidget {
                 ),
                 title: Text(item.title),
                 subtitle: Text("Price: 20"),
-                onTap: () {
-                  // Handle item tap here
-                  print('Tapped on ${item.title}');
-                  onTap(item);
-                },
               ))
           .toList(),
     );

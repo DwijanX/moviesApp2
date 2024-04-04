@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
                     height: 200,
                     child: SimpleMovieWidget(
                       items: selectedMovies,
-                      onTap: (movie) {},
                     ),
                   ),
                   ElevatedButton(
