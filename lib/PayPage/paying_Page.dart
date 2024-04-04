@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_2/SuccessfulPage/successfull_page.dart';
 import 'package:movies_app_2/Types/movie_type.dart';
 
 class MoviePayment extends StatefulWidget {
@@ -78,6 +79,10 @@ class _MoviePaymentState extends State<MoviePayment> {
                   onPressed: () {
                     // Add confirmation logic here
                     print('Confirm Payment');
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SuccessWidget()));
                   },
                   child: Text('Confirm'),
                 ),
