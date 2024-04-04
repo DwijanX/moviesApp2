@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:movies_app_2/HomeBloc/movie_cubit.dart';
+import 'package:movies_app_2/HomeBloc/movie_state.dart';
 
 class HomeBloc extends StatefulWidget {
   const HomeBloc({super.key});
@@ -42,6 +43,16 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ),
-        body: Text("sample"));
+        body: BlocBuilder<MovieCubit, MovieState>(
+          builder: (context, state) {
+            if (state is MovieLoading) {
+              return Text("Loading.......");
+            } else if (state is MovieNew) {
+              return Text("loaded");
+            } else {
+              return SizedBox();
+            }
+          },
+        ));
   }
 }

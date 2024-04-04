@@ -10,9 +10,9 @@ class MovieLoading extends MovieState {
   MovieLoading();
 }
 
-class HomeNew extends MovieState {
+class MovieNew extends MovieState {
   List<ResponseMovie> data;
-  HomeNew({required this.data});
+  MovieNew({required this.data});
   @override
   List<Object> get props => [data];
 }

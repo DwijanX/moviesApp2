@@ -4,7 +4,6 @@ import 'package:movies_app_2/HomeBloc/movie_state.dart';
 import 'package:movies_app_2/Types/movie_type.dart';
 
 class MovieCubit extends Cubit<MovieState> {
-  List<ResponseMovie> data = [];
   MovieCubit() : super(MovieLoading()) {
     fetchMovies();
   }
@@ -12,10 +11,10 @@ class MovieCubit extends Cubit<MovieState> {
   fetchMovies() async {
     final response = await dio.get(
         'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=fa3e844ce31744388e07fa47c7c5d8c3');
-    try {
-      data = welcomeFromJson(response.data) as List<ResponseMovie>;
 
-      emit(HomeNew(data: data));
+    try {
+      ResponseMovie data = welcomeFromJson(response.toString());
+      emit(MovieNew(data: [data]));
     } catch (e) {
       print(e);
     }
@@ -23,9 +22,9 @@ class MovieCubit extends Cubit<MovieState> {
 
   void addData(String welcomeJson) {
     try {
-      data = welcomeFromJson(welcomeJson) as List<ResponseMovie>;
+      ResponseMovie data = welcomeFromJson(welcomeJson);
 
-      emit(HomeNew(data: data));
+      emit(MovieNew(data: [data]));
     } catch (e) {
       print(e);
     }
