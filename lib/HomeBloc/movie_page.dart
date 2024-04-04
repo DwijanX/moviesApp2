@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:movies_app_2/HomeBloc/movie_cubit.dart';
 import 'package:movies_app_2/HomeBloc/movie_state.dart';
+import 'package:movies_app_2/PayPage/paying_Page.dart';
 import 'package:movies_app_2/Types/movie_type.dart';
 import 'package:movies_app_2/Widgets/list_widget.dart';
 
@@ -52,7 +53,15 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-                  ElevatedButton(onPressed: () {}, child: Text("pagar"))
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    MoviePayment(movies: selectedMovies)));
+                      },
+                      child: Text("pagar"))
                 ]))
             : null,
         appBar: AppBar(
