@@ -6,6 +6,7 @@ import 'package:movies_app_2/HomeBloc/movie_state.dart';
 import 'package:movies_app_2/PayPage/paying_Page.dart';
 import 'package:movies_app_2/Types/movie_type.dart';
 import 'package:movies_app_2/Widgets/list_widget.dart';
+import 'package:movies_app_2/Widgets/simple_list_widget.dart';
 
 class HomeBloc extends StatefulWidget {
   const HomeBloc({super.key});
@@ -44,13 +45,9 @@ class _HomePageState extends State<HomePage> {
                 child: Column(children: [
                   Container(
                     height: 200,
-                    child: MovieListWidget(
+                    child: SimpleMovieWidget(
                       items: selectedMovies,
-                      onTap: (movie) {
-                        setState(() {
-                          selectedMovies.remove(movie);
-                        });
-                      },
+                      onTap: (movie) {},
                     ),
                   ),
                   ElevatedButton(
@@ -79,12 +76,17 @@ class _HomePageState extends State<HomePage> {
               return Text("Loading.......");
             } else if (state is MovieNew) {
               return MovieListWidget(
-                  items: state.data.results,
-                  onTap: (Movie movie) {
-                    setState(() {
+                items: state.data.results,
+                onTap: (Movie movie) {
+                  setState(() {
+                    if (selectedMovies.contains(movie)) {
+                      selectedMovies.remove(movie);
+                    } else {
                       selectedMovies.add(movie);
-                    });
+                    }
                   });
+                },
+              );
             } else {
               return SizedBox();
             }
