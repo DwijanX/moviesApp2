@@ -15,6 +15,16 @@ class _MoviePaymentState extends State<MoviePayment> {
   Map<Movie, int> selectedMovies = {};
   int totalPrice = 0;
 
+
+  @override
+  void initState() {
+    super.initState();
+    widget.movies.forEach((movie) {
+      selectedMovies[movie] = 1;
+    });
+    calculateTotalPrice();
+  }
+
   @override
   Widget build(BuildContext context) {
     calculateTotalPrice();
@@ -52,7 +62,7 @@ class _MoviePaymentState extends State<MoviePayment> {
                 ),
                 Text(selectedMovies.containsKey(movie)
                     ? selectedMovies[movie]!.toString()
-                    : '0'),
+                    : '1'),
                 IconButton(
                   icon: Icon(Icons.add),
                   onPressed: () {
@@ -77,7 +87,6 @@ class _MoviePaymentState extends State<MoviePayment> {
                 Text('Total Price: \$${totalPrice.toString()}'),
                 ElevatedButton(
                   onPressed: () {
-                    // Add confirmation logic here
                     print('Confirm Payment');
                     Navigator.pushReplacement(
                         context,
