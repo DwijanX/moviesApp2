@@ -15,7 +15,6 @@ class _MoviePaymentState extends State<MoviePayment> {
   Map<Movie, int> selectedMovies = {};
   int totalPrice = 0;
 
-
   @override
   void initState() {
     super.initState();
@@ -38,42 +37,51 @@ class _MoviePaymentState extends State<MoviePayment> {
         itemBuilder: (context, index) {
           final movie = widget.movies[index];
           return ListTile(
-            leading: Image.network(
-              'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-              width: 50,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-            title: Text(movie.title),
-            subtitle: Text('\$20'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+              leading: Image.network(
+                'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                width: 50,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
+              title: Text(movie.title),
+              subtitle: Text('\$20'),
+              trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                 IconButton(
-                  icon: Icon(Icons.remove),
+                  icon: Icon(Icons.delete),
                   onPressed: () {
-                    setState(() {
-                      if (selectedMovies.containsKey(movie) &&
-                          selectedMovies[movie]! > 0) {
-                        selectedMovies[movie] = selectedMovies[movie]! - 1;
-                      }
-                    });
+                    deleteMovie(movie);
                   },
                 ),
-                Text(selectedMovies.containsKey(movie)
-                    ? selectedMovies[movie]!.toString()
-                    : '1'),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    setState(() {
-                      selectedMovies[movie] = (selectedMovies[movie] ?? 0) + 1;
-                    });
-                  },
-                ),
-              ],
-            ),
-          );
+                SizedBox(),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      onPressed: () {
+                        setState(() {
+                          if (selectedMovies.containsKey(movie) &&
+                              selectedMovies[movie]! > 0) {
+                            selectedMovies[movie] = selectedMovies[movie]! - 1;
+                          }
+                        });
+                      },
+                    ),
+                    Text(selectedMovies.containsKey(movie)
+                        ? selectedMovies[movie]!.toString()
+                        : '1'),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        setState(() {
+                          selectedMovies[movie] =
+                              (selectedMovies[movie] ?? 0) + 1;
+                        });
+                      },
+                    ),
+                  ],
+                )
+              ]));
         },
       ),
       bottomSheet: Container(
@@ -107,6 +115,13 @@ class _MoviePaymentState extends State<MoviePayment> {
     totalPrice = 0;
     selectedMovies.forEach((movie, quantity) {
       totalPrice += quantity * 20; // Assuming each movie costs $20
+    });
+  }
+
+  void deleteMovie(movie) {
+    setState(() {
+      widget.movies.remove(movie);
+      selectedMovies.remove(movie);
     });
   }
 }
