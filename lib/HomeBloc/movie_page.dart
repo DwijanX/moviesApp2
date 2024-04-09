@@ -6,6 +6,7 @@ import 'package:movies_app_2/HomeBloc/movie_state.dart';
 import 'package:movies_app_2/PayPage/paying_Page.dart';
 import 'package:movies_app_2/Types/movie_type.dart';
 import 'package:movies_app_2/Widgets/list_widget.dart';
+import 'package:sentry/sentry.dart';
 
 class HomeBloc extends StatefulWidget {
   const HomeBloc({super.key});
@@ -33,9 +34,21 @@ class _HomePageState extends State<HomePage> {
   List<Movie> selectedMovies = [];
   final dio = Dio();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Future<void> test() async {
+    try {
+      //throw Exception("Exception Throwed manually");
+    } catch (exception, stackTrace) {
+      print("test");
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    test();
     return Scaffold(
         key: _scaffoldKey,
         bottomSheet: selectedMovies.isNotEmpty
