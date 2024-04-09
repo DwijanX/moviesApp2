@@ -60,6 +60,11 @@ class _HomePageState extends State<HomePage> {
                     height: 200,
                     child: SimpleMovieWidget(
                       items: selectedMovies,
+                      onDelete: (Movie movie) {
+                        setState(() {
+                          selectedMovies.remove(movie);
+                        });
+                      },
                     ),
                   ),
                   ElevatedButton(
